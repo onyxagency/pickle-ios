@@ -12,7 +12,7 @@ import CoreLocation
 var places = [Dictionary<String, String>()]
 var locationUser = [String:CLLocationDegrees]()
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
   
   var manager:CLLocationManager!
   
@@ -118,7 +118,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
       activityIndicator.startAnimating()
       UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     
-      let request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:3000/search")!)
+      let request = NSMutableURLRequest(URL: NSURL(string: "http://pickle.onyxla.co/search")!)
       let session = NSURLSession.sharedSession()
     
       let params = ["location":userLocation, "term":mealType] as Dictionary
@@ -159,6 +159,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 var imageURL = ""
                 if (business["image_url"] as? String != nil) {
                   imageURL = business["image_url"] as! String
+                  imageURL = imageURL.stringByReplacingOccurrencesOfString("http", withString: "https")
                 }
                 
                 var name = ""
@@ -187,7 +188,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let longitude = coordinateArray["longitude"]! as! Double
                 let long = longitude.description
                 
-                let rating = business["rating_img_url"] as! String
+                var rating = business["rating_img_url"] as! String
+                rating = rating.stringByReplacingOccurrencesOfString("http", withString: "https")
                   
                 places.append(["name":name, "imageUrl":imageURL, "category":category, "address":address, "phone":phone, "rating":rating, "latitude":lat, "longitude":long, "selected":"false"])
                 
@@ -284,6 +286,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
               
               self.location.text = "Current Location"
               
+              self.setContinueBtn()
+              
             }
             
           }
@@ -318,11 +322,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     self.continueBtn.enabled = false
     
+    self.location.delegate = self
+    
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+    return false
   }
 
 

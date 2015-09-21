@@ -17,6 +17,27 @@ func delay(delay:Double, closure:()->()) {
     dispatch_get_main_queue(), closure)
 }
 
+func getDataFromURL(url:NSURL, completion: ((data: NSData?) -> Void)) {
+  print(url)
+  NSURLSession.sharedSession().dataTaskWithURL(url) { data, response, error in
+    print(data)
+    print(error)
+    completion(data: data)
+  }.resume()
+}
+
+func downloadImage(url:NSURL, image:UIImageView) {
+  print("inside downloadImage func")
+  print(url)
+  getDataFromURL(url) { data in
+    print(data)
+    dispatch_async(dispatch_get_main_queue()) {
+      print("finished downloading")
+      image.image = UIImage(data: data!)
+    }
+  }
+}
+
 class LaunchViewController: UIViewController {
 
     override func viewDidLoad() {

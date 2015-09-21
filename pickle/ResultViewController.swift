@@ -68,7 +68,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
       
     }
      
-    let randomIndex = Int(arc4random_uniform(UInt32(resultPlaces.count)))
+    let randomIndex = Int(arc4random_uniform(UInt32(resultPlaces.count - 1)))
     
     let resultPlace = resultPlaces[randomIndex]
       
@@ -77,26 +77,65 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
     
-    let url = NSURL(string: resultPlace["rating"]!)
+//    print(resultPlace["rating"])
+//    print(resultPlace["rating"]!)
     
-    let urlRequest = NSURLRequest(URL: url!)
+    if let checkedURL = NSURL(string: resultPlace["rating"]!) {
+      print(checkedURL)
+      downloadImage(checkedURL, image: ratingImage)
+    }
     
-    NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
-        response, data, error in
-      
-        if error != nil {
-        
-          print("There was an error")
-        
-        } else {
-        
-          let image = UIImage(data: data!)
-        
-          self.ratingImage.image = image
-        
-        }
-      
-      })
+//    let request = NSMutableURLRequest(URL: NSURL(string: resultPlace["rating"]!)!)
+//    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//    request.addValue("application/json", forHTTPHeaderField: "Accept")
+//    
+//    let session = NSURLSession.sharedSession()
+//    request.HTTPMethod = "POST"
+//    
+//    print(request)
+//    
+//    let task = session.dataTaskWithRequest(request) { data, response, error in
+//      
+//      print(data)
+//      
+//      if error != nil {
+//        
+//        print("Rating error")
+//        
+//      } else {
+//        
+//        print("made it")
+//        let image = UIImage(data: data!)
+//        self.ratingImage.image = image
+//        
+//      }
+//      
+//    }
+//    
+//    task.resume()
+    
+//    let url = NSURL(string: resultPlace["rating"]!)
+//    
+//    let urlRequest = NSURLRequest(URL: url!)
+//    
+//    print(url)
+    
+//    NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
+//        response, data, error in
+//      
+//        if error != nil {
+//        
+//          print("There was an error")
+//        
+//        } else {
+//        
+//          let image = UIImage(data: data!)
+//        
+//          self.ratingImage.image = image
+//        
+//        }
+//      
+//      })
     
     // get distance between users location and destination
     
