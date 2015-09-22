@@ -12,11 +12,17 @@ import MapKit
 
 class ResultViewController: UIViewController, CLLocationManagerDelegate {
 
+  @IBOutlet var placeImage: UIImageView!
   @IBOutlet var placeName: UILabel!
   @IBOutlet var placeCategories: UILabel!
   @IBOutlet var leaveTimer: UILabel!
   @IBOutlet var ratingImage: UIImageView!
-  @IBOutlet var distanceLabel: UILabel!
+  @IBOutlet var getDirections: UIButton!
+  @IBOutlet var yelpUrl: UIButton!
+  //@IBOutlet var distanceLabel: UILabel!
+  
+  var lat:NSString = ""
+  var lng:NSString = ""
   
   var timer = NSTimer()
   var count = 300
@@ -47,10 +53,40 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
   }
   
+  @IBAction func goToYelp(sender: AnyObject) {
+    let targetURL = NSURL(string: yelpUrl.currentTitle!)
+    let application = UIApplication.sharedApplication()
+    application.openURL(targetURL!)
+  }
+  
+  @IBAction func getDirections(sender: AnyObject) {
+    
+    let latitude:CLLocationDegrees = lat.doubleValue
+    let longitude:CLLocationDegrees = lng.doubleValue
+    
+    let regionDistance:CLLocationDistance = 1000
+    let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+    let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+    let options = [
+      MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+      MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+    ]
+    let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+    let mapItem = MKMapItem(placemark: placemark)
+    mapItem.name = placeName.text!
+    mapItem.openInMapsWithLaunchOptions(options)
+    
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.title = "Your Pickle"
+    
+    getDirections.layer.borderColor = UIColor.whiteColor().CGColor
+    
+    placeImage.layer.cornerRadius = placeImage.frame.width
+    placeImage.clipsToBounds = true
     
     var resultPlaces = places
     
@@ -71,38 +107,47 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     let randomIndex = Int(arc4random_uniform(UInt32(resultPlaces.count)))
     
     let resultPlace = resultPlaces[randomIndex]
+    
+    if let placeImageURL = NSURL(string: resultPlace["imageUrl"]!) {
+      downloadImage(placeImageURL, image: placeImage)
+    }
       
     placeName.text = resultPlace["name"]
     placeCategories.text = resultPlace["category"]
     
+    if let placeRatingURL = NSURL(string: resultPlace["rating"]!) {
+      downloadImage(placeRatingURL, image: ratingImage)
+    }
+    
     timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
     
-    if let checkedURL = NSURL(string: resultPlace["rating"]!) {
-      downloadImage(checkedURL, image: ratingImage)
-    }
+    yelpUrl.setTitle(resultPlace["mobileUrl"], forState: .Normal)
+    
+    lat = resultPlace["latitude"]!
+    lng = resultPlace["longitude"]!
     
     // get distance between users location and destination
     
-    if locationUser.count > 0 {
-      
-      let userLocation:CLLocation = CLLocation(latitude: locationUser["latitude"]!, longitude: locationUser["longitude"]!)
-      
-      let destLatitude:Double = NSString(string: resultPlace["latitude"]!).doubleValue
-      let destLat:CLLocationDegrees = destLatitude
-      let destLongitude:Double = NSString(string: resultPlace["longitude"]!).doubleValue
-      let destLong:CLLocationDegrees = destLongitude
-      
-      let destLocation:CLLocation = CLLocation(latitude: destLat, longitude: destLong)
-      
-      let distance:CLLocationDistance = userLocation.distanceFromLocation(destLocation)
-      
-      let df = MKDistanceFormatter()
-      
-      df.unitStyle = .Abbreviated
-      
-      distanceLabel.text = df.stringFromDistance(distance)
-      
-    }
+//    if locationUser.count > 0 {
+//      
+//      let userLocation:CLLocation = CLLocation(latitude: locationUser["latitude"]!, longitude: locationUser["longitude"]!)
+//      
+//      let destLatitude:Double = NSString(string: resultPlace["latitude"]!).doubleValue
+//      let destLat:CLLocationDegrees = destLatitude
+//      let destLongitude:Double = NSString(string: resultPlace["longitude"]!).doubleValue
+//      let destLong:CLLocationDegrees = destLongitude
+//      
+//      let destLocation:CLLocation = CLLocation(latitude: destLat, longitude: destLong)
+//      
+//      let distance:CLLocationDistance = userLocation.distanceFromLocation(destLocation)
+//      
+//      let df = MKDistanceFormatter()
+//      
+//      df.unitStyle = .Abbreviated
+//      
+//      distanceLabel.text = df.stringFromDistance(distance)
+//      
+//    }
     
   }
   

@@ -134,14 +134,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
       lunch.hidden = true
       dinner.hidden = true
       
-
-      //activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-      //activityIndicator.center = self.view.center
-      //activityIndicator.hidesWhenStopped = true
-      //activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-      //view.addSubview(activityIndicator)
-      //activityIndicator.startAnimating()
-      
       UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     
       let request = NSMutableURLRequest(URL: NSURL(string: "http://pickle.onyxla.co/search")!)
@@ -216,17 +208,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                 
                 var rating = business["rating_img_url"] as! String
                 rating = rating.stringByReplacingOccurrencesOfString("http", withString: "https")
+                
+                let mobileURL = business["mobile_url"] as! String
                   
-                places.append(["name":name, "imageUrl":imageURL, "category":category, "address":address, "phone":phone, "rating":rating, "latitude":lat, "longitude":long, "selected":"false"])
+                places.append(["name":name, "imageUrl":imageURL, "category":category, "address":address, "phone":phone, "rating":rating, "latitude":lat, "longitude":long, "selected":"false", "mobileUrl": mobileURL])
                 
               }
               
               dispatch_async(dispatch_get_main_queue()) {
-                
-                //self.activityIndicator.stopAnimating()
-                
-                self.continueBtn.setTitle("Continue", forState: .Normal)
-                self.continueArrow.hidden = false
                 
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
@@ -341,6 +330,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     self.navigationController?.navigationBarHidden = true
     places.removeAll(keepCapacity: true)
+    
+    self.continueBtn.setTitle("Continue", forState: .Normal)
+    self.continueArrow.hidden = false
     
   }
   

@@ -39,6 +39,10 @@
 		91B9D0761BB1569E001D9789 /* pickle-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0741BB1569E001D9789 /* pickle-button@2x.png */; settings = {ASSET_TAGS = (); }; };
 		91B9D0791BB1602F001D9789 /* pickle-all-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0771BB1602F001D9789 /* pickle-all-button.png */; settings = {ASSET_TAGS = (); }; };
 		91B9D07A1BB1602F001D9789 /* pickle-all-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0781BB1602F001D9789 /* pickle-all-button@2x.png */; settings = {ASSET_TAGS = (); }; };
+		91B9D07F1BB1C419001D9789 /* result-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07B1BB1C419001D9789 /* result-background.jpg */; settings = {ASSET_TAGS = (); }; };
+		91B9D0801BB1C419001D9789 /* result-background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07C1BB1C419001D9789 /* result-background@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		91B9D0811BB1C419001D9789 /* yelp-logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07D1BB1C419001D9789 /* yelp-logo-large.png */; settings = {ASSET_TAGS = (); }; };
+		91B9D0821BB1C419001D9789 /* yelp-logo-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07E1BB1C419001D9789 /* yelp-logo-large@2x.png */; settings = {ASSET_TAGS = (); }; };
 		91BA8B441AA93126007664D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA8B431AA93126007664D3 /* AppDelegate.swift */; };
 		91BA8B461AA93126007664D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA8B451AA93126007664D3 /* ViewController.swift */; };
 		91BA8B491AA93126007664D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91BA8B471AA93126007664D3 /* Main.storyboard */; };
@@ -93,6 +97,10 @@
 		91B9D0741BB1569E001D9789 /* pickle-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pickle-button@2x.png"; sourceTree = "<group>"; };
 		91B9D0771BB1602F001D9789 /* pickle-all-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pickle-all-button.png"; sourceTree = "<group>"; };
 		91B9D0781BB1602F001D9789 /* pickle-all-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pickle-all-button@2x.png"; sourceTree = "<group>"; };
+		91B9D07B1BB1C419001D9789 /* result-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "result-background.jpg"; sourceTree = "<group>"; };
+		91B9D07C1BB1C419001D9789 /* result-background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "result-background@2x.jpg"; sourceTree = "<group>"; };
+		91B9D07D1BB1C419001D9789 /* yelp-logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yelp-logo-large.png"; sourceTree = "<group>"; };
+		91B9D07E1BB1C419001D9789 /* yelp-logo-large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yelp-logo-large@2x.png"; sourceTree = "<group>"; };
 		91BA8B3E1AA93126007664D3 /* pickle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91BA8B421AA93126007664D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91BA8B431AA93126007664D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +153,10 @@
 				91EFF45F1BB0DFAF005D6D8E /* back-arrow@2x.png */,
 				91597E371BAB860B00C257CC /* current-location.png */,
 				91B9D0731BB1569E001D9789 /* pickle-button.png */,
+				91B9D07B1BB1C419001D9789 /* result-background.jpg */,
+				91B9D07C1BB1C419001D9789 /* result-background@2x.jpg */,
+				91B9D07D1BB1C419001D9789 /* yelp-logo-large.png */,
+				91B9D07E1BB1C419001D9789 /* yelp-logo-large@2x.png */,
 				91B9D0741BB1569E001D9789 /* pickle-button@2x.png */,
 				91B9D0771BB1602F001D9789 /* pickle-all-button.png */,
 				91B9D0781BB1602F001D9789 /* pickle-all-button@2x.png */,
@@ -321,10 +333,12 @@
 				91B9D0791BB1602F001D9789 /* pickle-all-button.png in Resources */,
 				912BEFB61BA9DA42006A4674 /* intro.png in Resources */,
 				91B9D07A1BB1602F001D9789 /* pickle-all-button@2x.png in Resources */,
+				91B9D0821BB1C419001D9789 /* yelp-logo-large@2x.png in Resources */,
 				912BEFC91BA9EC2B006A4674 /* HVD Fonts - BrandonText-Medium.otf in Resources */,
 				91B9D0761BB1569E001D9789 /* pickle-button@2x.png in Resources */,
 				91B9D06C1BB13DC2001D9789 /* unselected@2x.png in Resources */,
 				912BEFCE1BAA2347006A4674 /* menu-background.jpg in Resources */,
+				91B9D07F1BB1C419001D9789 /* result-background.jpg in Resources */,
 				91B9D0691BB13DC2001D9789 /* selected.png in Resources */,
 				912BEFCC1BA9EDE7006A4674 /* onyx-logo.png in Resources */,
 				91EFF4601BB0DFAF005D6D8E /* back-arrow@2x.png in Resources */,
@@ -333,11 +347,13 @@
 				91B9D0751BB1569E001D9789 /* pickle-button.png in Resources */,
 				91597E3A1BABC24F00C257CC /* arrow.png in Resources */,
 				912BEFC81BA9EC2B006A4674 /* HVD Fonts - BrandonText-LightItalic.otf in Resources */,
+				91B9D0811BB1C419001D9789 /* yelp-logo-large.png in Resources */,
 				91BA8B4E1AA93126007664D3 /* LaunchScreen.xib in Resources */,
 				91B722101AEFF66800399308 /* current-location1.png in Resources */,
 				91BA8B4B1AA93126007664D3 /* Images.xcassets in Resources */,
 				912BEFC41BA9EC2B006A4674 /* CircularStd-Bold.otf in Resources */,
 				91B9D06A1BB13DC2001D9789 /* selected@2x.png in Resources */,
+				91B9D0801BB1C419001D9789 /* result-background@2x.jpg in Resources */,
 				91EFF4621BB0E23E005D6D8E /* back-arrow.png in Resources */,
 				912BEFCA1BA9EC2B006A4674 /* HVD Fonts - BrandonText-Regular.otf in Resources */,
 			);
