@@ -14,6 +14,8 @@ class TblCell: UITableViewCell {
   @IBOutlet var placeName: UILabel!
   @IBOutlet var placeCategory: UILabel!
   @IBOutlet var placeAddress: UILabel!
+  @IBOutlet var placeRating: UIImageView!
+  @IBOutlet var placeSelectedImage: UIImageView!
   
     override func awakeFromNib() {
         super.awakeFromNib()

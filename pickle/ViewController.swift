@@ -11,6 +11,7 @@ import CoreLocation
 
 var places = [Dictionary<String, String>()]
 var locationUser = [String:CLLocationDegrees]()
+var friendlyLocation = ""
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
   
@@ -49,6 +50,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
   @IBOutlet var dinner: UIButton!
   @IBOutlet var continueBtn: UIButton!
   @IBOutlet var continueArrow: UIImageView!
+  @IBOutlet var menuBar: UIView!
+  @IBOutlet var backgroundImage: UIImageView!
+  @IBOutlet var line: UIView!
+  @IBOutlet var currentLocationImage: UIImageView!
   
   @IBAction func locationChanged(sender: AnyObject) {
     setContinueBtn()
@@ -97,6 +102,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     if location.text != "Current Location" {
       
       userLocation = location.text!
+      friendlyLocation = location.text!
       
     }
     
@@ -110,12 +116,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
       
     } else {
       
-      activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-      activityIndicator.center = self.view.center
-      activityIndicator.hidesWhenStopped = true
-      activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-      view.addSubview(activityIndicator)
-      activityIndicator.startAnimating()
+      continueBtn.setTitle("Loading...", forState: .Normal)
+      continueArrow.hidden = true
+      menuBar.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0)
+      
+      let darkBackgroundImage = UIImage(named: "dark-menu-background.jpg")
+      UIView.transitionWithView(self.backgroundImage,
+        duration: 0.3,
+        options: .TransitionCrossDissolve,
+        animations: { self.backgroundImage.image = darkBackgroundImage },
+        completion: nil)
+      
+      line.hidden = true
+      currentLocationImage.hidden = true
+      location.hidden = true
+      breakfast.hidden = true
+      lunch.hidden = true
+      dinner.hidden = true
+      
+
+      //activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+      //activityIndicator.center = self.view.center
+      //activityIndicator.hidesWhenStopped = true
+      //activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+      //view.addSubview(activityIndicator)
+      //activityIndicator.startAnimating()
+      
       UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     
       let request = NSMutableURLRequest(URL: NSURL(string: "http://pickle.onyxla.co/search")!)
@@ -197,7 +223,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
               
               dispatch_async(dispatch_get_main_queue()) {
                 
-                self.activityIndicator.stopAnimating()
+                //self.activityIndicator.stopAnimating()
+                
+                self.continueBtn.setTitle("Continue", forState: .Normal)
+                self.continueArrow.hidden = false
+                
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
                 self.performSegueWithIdentifier("showPlaces", sender: nil)
@@ -284,6 +314,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
               
               self.userLocation = streetNumber + " " + street + " " + city
               
+              friendlyLocation = city
+              
               self.location.text = "Current Location"
               
               self.setContinueBtn()
@@ -335,7 +367,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     self.view.endEditing(true)
     return false
   }
-
 
 }
 

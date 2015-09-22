@@ -12,14 +12,15 @@ var placeCount = 0
 
 class TableViewController: UITableViewController {
   
-  @IBOutlet var pickleButton: UIBarButtonItem!
+  //@IBOutlet var pickleButton: UIBarButtonItem!
+  //@IBOutlet var pickleButton: UIButton!
   
   @IBAction func pickleAll(sender: AnyObject) {
     
     navigationItem.title = ""
     
     performSegueWithIdentifier("showResult", sender: nil)
-    
+
   }
   
   override func viewDidLoad() {
@@ -29,6 +30,15 @@ class TableViewController: UITableViewController {
     let nib = UINib(nibName: "vwTblCell", bundle: nil)
     tableView.registerNib(nib, forCellReuseIdentifier: "cell")
     
+    self.navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+    self.navigationController?.navigationBar.barTintColor = colorWithHexString("6FD16B")
+    
+    let navBarFont:AnyObject = UIFont(name: "CircularStd-Book", size: 16)!
+    UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: navBarFont]
+    
+    self.tableView.separatorColor = colorWithHexString("D8D8D8")
+
+    self.tableView.tableFooterView = UIView(frame: CGRectZero)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -71,37 +81,50 @@ class TableViewController: UITableViewController {
     
     cell.placeAddress.text = places[indexPath.row]["address"]
     
-    let url = NSURL(string: places[indexPath.row]["imageUrl"]!)
+    if let ratingURL = NSURL(string: places[indexPath.row]["rating"]!) {
+      downloadImage(ratingURL, image: cell.placeRating)
+    }
     
-    let urlRequest = NSURLRequest(URL: url!)
-    
-    NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
-      response, data, error in
-    
-      if error != nil {
-    
-        print("There was an error")
-    
-      } else {
-    
-        let image = UIImage(data: data!)
-    
-        cell.placeImage.image = image
-            
-      }
-          
-    })
+    if let imageURL = NSURL(string: places[indexPath.row]["imageUrl"]!) {
+      downloadImage(imageURL, image: cell.placeImage)
+    }
     
     if (places[indexPath.row]["selected"] == "true") {
       
-      cell.backgroundColor = UIColor.blueColor()
+      cell.backgroundColor = colorWithHexString("EBFFEA")
+      UIView.transitionWithView(cell.placeSelectedImage,
+        duration: 0.2,
+        options: .TransitionCrossDissolve,
+        animations: { cell.placeSelectedImage.image = UIImage(named: "selected.png") },
+        completion: nil)
       
     } else {
       
       cell.backgroundColor = UIColor.whiteColor()
+      UIView.transitionWithView(cell.placeSelectedImage,
+        duration: 0.2,
+        options: .TransitionCrossDissolve,
+        animations: { cell.placeSelectedImage.image = UIImage(named: "unselected.png") },
+        completion: nil)
       
     }
     
+  }
+  
+  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! CustomHeaderCellTableViewCell
+    headerCell.backgroundColor = colorWithHexString("F6F6F6")
+    return headerCell
+  }
+  
+  override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    let footerCell = tableView.dequeueReusableCellWithIdentifier("FooterCell") as! CustomFooterCellTableViewCell
+    footerCell.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0)
+    if placeCount > 0 {
+      footerCell.pickleButton.setTitle("\(placeCount)", forState: .Normal)
+      footerCell.pickleButton.setBackgroundImage(UIImage(named: "pickle-button.png"), forState: .Normal)
+    }
+    return footerCell
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -118,37 +141,46 @@ class TableViewController: UITableViewController {
       
     }
     
-    if placeCount <= 0 {
-      
-      pickleButton.title = "Pickle All"
-      
-    } else {
-      
-      pickleButton.title = "Pickle \(placeCount)"
-      
-    }
-    
     tableView.reloadData()
     
   }
   
+  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    if cell.respondsToSelector("setSeparatorInset:") {
+      cell.separatorInset = UIEdgeInsetsZero
+    }
+    if cell.respondsToSelector("setLayoutMargins:") {
+      cell.layoutMargins = UIEdgeInsetsZero
+    }
+    if cell.respondsToSelector("setPreservesSuperviewLayoutMargins:") {
+      cell.preservesSuperviewLayoutMargins = false
+    }
+  }
+  
   override func viewWillAppear(animated: Bool) {
     
-    self.navigationItem.title = "Select Places"
+    self.navigationItem.title = "Places in \(friendlyLocation)"
     self.navigationController?.navigationBarHidden = false
-    self.navigationController?.setToolbarHidden(false, animated: true)
-    self.navigationController?.toolbar.barTintColor = UIColor.whiteColor()
+    placeCount = 0
 
   }
   
   override func viewWillDisappear(animated: Bool) {
     
-    self.navigationController?.setToolbarHidden(true, animated: true)
+    self.navigationController?.navigationBarHidden = true
     
   }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return 120
+    return 93
+  }
+  
+  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 25
+  }
+  
+  override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 72
   }
 
 }
