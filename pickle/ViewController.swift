@@ -24,7 +24,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
       
-      self.dismissViewControllerAnimated(true, completion: nil)
+      self.continueBtn.setTitle("Continue", forState: .Normal)
+      self.continueArrow.hidden = false
+      self.menuBar.backgroundColor = colorWithHexString("026F5A")
+      
+      let backgroundImage = UIImage(named: "menu-background.jpg")
+      UIView.transitionWithView(self.backgroundImage,
+        duration: 0.3,
+        options: .TransitionCrossDissolve,
+        animations: { self.backgroundImage.image = backgroundImage },
+        completion: nil)
+      
+      self.line.hidden = false
+      self.currentLocationImage.hidden = false
+      self.location.hidden = false
+      self.breakfast.hidden = false
+      self.lunch.hidden = false
+      self.dinner.hidden = false
       
     }))
     
@@ -112,7 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
     if errorMessage != "" {
       
-      displayAlert("Stuck In A Pickle", error: errorMessage)
+      displayAlert("Stuck in a Pickle", error: errorMessage)
       
     } else {
       
@@ -168,58 +184,88 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
           
           if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
             
-            let businesses:NSArray = json["businesses"] as! NSArray
+            if let businesses:NSArray = json["businesses"] as? NSArray {
             
-            if businesses.count > 0 {
-              
-              for business in businesses {
+              if businesses.count > 0 {
                 
-                var imageURL = ""
-                if (business["image_url"] as? String != nil) {
-                  imageURL = business["image_url"] as! String
-                  imageURL = imageURL.stringByReplacingOccurrencesOfString("http", withString: "https")
-                }
-                
-                var name = ""
-                if (business["name"] as? String != nil) {
-                  name = business["name"] as! String
-                }
-                
-                var phone = ""
-                if (business["display_phone"] as? String != nil) {
-                  phone = business["display_phone"] as! String
-                }
-
-                let categoriesArray = business["categories"] as! NSArray
-                let categoryArray = categoriesArray[0] as! NSArray
-                let category = categoryArray[0] as! String
-                
-                let locationArray = business["location"] as! NSDictionary
-                let addressArray = locationArray["address"] as! NSArray
-                let address = addressArray[0] as! String
-                
-                let coordinateArray = locationArray["coordinate"] as! NSDictionary
-                
-                let latitude = coordinateArray["latitude"]! as! Double
-                let lat = latitude.description
-                
-                let longitude = coordinateArray["longitude"]! as! Double
-                let long = longitude.description
-                
-                var rating = business["rating_img_url"] as! String
-                rating = rating.stringByReplacingOccurrencesOfString("http", withString: "https")
-                
-                let mobileURL = business["mobile_url"] as! String
+                for business in businesses {
                   
-                places.append(["name":name, "imageUrl":imageURL, "category":category, "address":address, "phone":phone, "rating":rating, "latitude":lat, "longitude":long, "selected":"false", "mobileUrl": mobileURL])
+                  var imageURL = ""
+                  if (business["image_url"] as? String != nil) {
+                    imageURL = business["image_url"] as! String
+                  }
+                  
+                  var name = ""
+                  if (business["name"] as? String != nil) {
+                    name = business["name"] as! String
+                  }
+                  
+                  var phone = ""
+                  if (business["display_phone"] as? String != nil) {
+                    phone = business["display_phone"] as! String
+                  }
+
+                  var category = ""
+                  if let categoriesArray = business["categories"] as? NSArray {
+                    if categoriesArray.count > 0 {
+                      if let categoryArray = categoriesArray[0] as? NSArray {
+                        if categoryArray.count > 0 {
+                          category = categoryArray[0] as! String
+                        }
+                      }
+                    }
+                  }
+                  
+                  var address = ""
+                  let locationArray = business["location"] as! NSDictionary
+                  
+                  if let addressArray = locationArray["address"] as? NSArray {
+                    if addressArray.count > 0 {
+                      address = addressArray[0] as! String
+                    } else if let displayAddressArray = locationArray["display_address"] as? NSArray {
+                      if displayAddressArray.count > 0 {
+                        address = displayAddressArray[0] as! String
+                      }
+                    }
+                  }
+                  
+                  let coordinateArray = locationArray["coordinate"] as! NSDictionary
+                  
+                  let latitude = coordinateArray["latitude"]! as! Double
+                  let lat = latitude.description
+                  
+                  let longitude = coordinateArray["longitude"]! as! Double
+                  let long = longitude.description
+                  
+                  var rating = ""
+                  if (business["rating_img_url"] as? String != nil) {
+                    rating = business["rating_img_url"] as! String
+                  }
+                  
+                  var mobileURL = ""
+                  if (business["mobile_url"] as? String != nil) {
+                    mobileURL = business["mobile_url"] as! String
+                  }
+                    
+                  places.append(["name":name, "imageUrl":imageURL, "category":category, "address":address, "phone":phone, "rating":rating, "latitude":lat, "longitude":long, "selected":"false", "mobileUrl": mobileURL])
+                  
+                }
                 
-              }
-              
-              dispatch_async(dispatch_get_main_queue()) {
+                dispatch_async(dispatch_get_main_queue()) {
+                  
+                  UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                  
+                  self.performSegueWithIdentifier("showPlaces", sender: nil)
+                  
+                }
                 
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+              } else {
                 
-                self.performSegueWithIdentifier("showPlaces", sender: nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                  
+                  self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
+                  
+                }
                 
               }
               
@@ -227,7 +273,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
               
               dispatch_async(dispatch_get_main_queue()) {
                 
-                self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again")
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
                 
               }
               
@@ -237,7 +285,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             
             dispatch_async(dispatch_get_main_queue()) {
               
-              self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again")
+              self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
               
             }
             

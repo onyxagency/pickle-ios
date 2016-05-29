@@ -8,6 +8,29 @@
 
 import UIKit
 
+extension CollectionType where Index == Int {
+  /// Return a copy of `self` with its elements shuffled
+  func shuffle() -> [Generator.Element] {
+    var list = Array(self)
+    list.shuffleInPlace()
+    return list
+  }
+}
+
+extension MutableCollectionType where Index == Int {
+  /// Shuffle the elements of `self` in-place.
+  mutating func shuffleInPlace() {
+    // empty and single-element collections don't shuffle
+    if count < 2 { return }
+    
+    for i in 0..<count - 1 {
+      let j = Int(arc4random_uniform(UInt32(count - i))) + i
+      guard i != j else { continue }
+      swap(&self[i], &self[j])
+    }
+  }
+}
+
 func delay(delay:Double, closure:()->()) {
   dispatch_after(
     dispatch_time(
@@ -26,7 +49,9 @@ func getDataFromURL(url:NSURL, completion: ((data: NSData?) -> Void)) {
 func downloadImage(url:NSURL, image:UIImageView) {
   getDataFromURL(url) { data in
     dispatch_async(dispatch_get_main_queue()) {
-      image.image = UIImage(data: data!)
+      if data != nil {
+        image.image = UIImage(data: data!)
+      }
     }
   }
 }
@@ -55,31 +80,68 @@ func colorWithHexString (hex:String) -> UIColor {
 }
 
 class LaunchViewController: UIViewController {
+  
+  @IBOutlet var p: UILabel!
+  @IBOutlet var i: UILabel!
+  @IBOutlet var c: UILabel!
+  @IBOutlet var k: UILabel!
+  @IBOutlet var l: UILabel!
+  @IBOutlet var e: UILabel!
+  
+  override func viewDidLoad() {
+      super.viewDidLoad()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      delay(1) {
-        
-        self.performSegueWithIdentifier("showMenu", sender: nil)
-        
-      }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // Animate PICKLE letters
+    var pickleLetters = [p, i, c, k, l, e]
+    pickleLetters.shuffleInPlace()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[0].alpha = 1
+    }, completion: nil)
+    
+    UIView.animateWithDuration(0.5, delay: 0.75, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[1].alpha = 1
+    }, completion: nil)
+    
+    UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[2].alpha = 1
+    }, completion: nil)
+    
+    UIView.animateWithDuration(0.5, delay: 1.25, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[3].alpha = 1
+    }, completion: nil)
+    
+    UIView.animateWithDuration(0.5, delay: 1.5, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[4].alpha = 1
+    }, completion: nil)
+    
+    UIView.animateWithDuration(0.5, delay: 1.75, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+      pickleLetters[5].alpha = 1
+    }, completion: nil)
+    
+    
+    // After delay go to menu screen
+    delay(3) {
+      
+      self.performSegueWithIdentifier("showMenu", sender: nil)
+      
     }
-    */
+  }
+
+  override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
+      // Dispose of any resources that can be recreated.
+  }
+  
+
+  /*
+  // MARK: - Navigation
+
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+      // Get the new view controller using segue.destinationViewController.
+      // Pass the selected object to the new view controller.
+  }
+  */
 
 }

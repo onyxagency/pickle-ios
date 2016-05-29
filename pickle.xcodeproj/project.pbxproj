@@ -18,39 +18,41 @@
 		912BEFCA1BA9EC2B006A4674 /* HVD Fonts - BrandonText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 912BEFC01BA9EBEF006A4674 /* HVD Fonts - BrandonText-Regular.otf */; };
 		912BEFCC1BA9EDE7006A4674 /* onyx-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 912BEFCB1BA9EDE7006A4674 /* onyx-logo.png */; };
 		912BEFCE1BAA2347006A4674 /* menu-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 912BEFCD1BAA2347006A4674 /* menu-background.jpg */; };
+		9144738E1CFA3ABF00CD4482 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9144738C1CFA3ABF00CD4482 /* Fabric.framework */; };
+		9144738F1CFA3ABF00CD4482 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9144738D1CFA3ABF00CD4482 /* Crashlytics.framework */; };
 		91597E381BAB860B00C257CC /* current-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 91597E371BAB860B00C257CC /* current-location.png */; };
 		91597E3A1BABC24F00C257CC /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91597E391BABC24F00C257CC /* arrow.png */; };
-		918033E11BB0B998002C09B5 /* dark-menu-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 918033E01BB0B998002C09B5 /* dark-menu-background.jpg */; settings = {ASSET_TAGS = (); }; };
+		918033E11BB0B998002C09B5 /* dark-menu-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 918033E01BB0B998002C09B5 /* dark-menu-background.jpg */; };
 		919BE6B91AE8467700C92D80 /* vwTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 919BE6B81AE8467700C92D80 /* vwTblCell.xib */; };
 		919BE6BB1AE846E000C92D80 /* TblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BE6BA1AE846E000C92D80 /* TblCell.swift */; };
 		919BE6BD1AE9ADD700C92D80 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BE6BC1AE9ADD700C92D80 /* ResultViewController.swift */; };
 		91B7220C1AEEF90600399308 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7220B1AEEF90600399308 /* CoreLocation.framework */; };
 		91B7220E1AEEF90E00399308 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B7220D1AEEF90E00399308 /* MapKit.framework */; };
 		91B722101AEFF66800399308 /* current-location1.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B7220F1AEFF66800399308 /* current-location1.png */; };
-		91B9D05E1BB10EA2001D9789 /* CustomHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9D05D1BB10EA2001D9789 /* CustomHeaderCellTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		91B9D0611BB11887001D9789 /* yelp-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D05F1BB11887001D9789 /* yelp-logo.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0621BB11887001D9789 /* yelp-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0601BB11887001D9789 /* yelp-logo@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0691BB13DC2001D9789 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0651BB13DC2001D9789 /* selected.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D06A1BB13DC2001D9789 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0661BB13DC2001D9789 /* selected@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D06B1BB13DC2001D9789 /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0671BB13DC2001D9789 /* unselected.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D06C1BB13DC2001D9789 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0681BB13DC2001D9789 /* unselected@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0721BB142A3001D9789 /* CustomFooterCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9D0711BB142A3001D9789 /* CustomFooterCellTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		91B9D0751BB1569E001D9789 /* pickle-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0731BB1569E001D9789 /* pickle-button.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0761BB1569E001D9789 /* pickle-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0741BB1569E001D9789 /* pickle-button@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0791BB1602F001D9789 /* pickle-all-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0771BB1602F001D9789 /* pickle-all-button.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D07A1BB1602F001D9789 /* pickle-all-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0781BB1602F001D9789 /* pickle-all-button@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D07F1BB1C419001D9789 /* result-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07B1BB1C419001D9789 /* result-background.jpg */; settings = {ASSET_TAGS = (); }; };
-		91B9D0801BB1C419001D9789 /* result-background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07C1BB1C419001D9789 /* result-background@2x.jpg */; settings = {ASSET_TAGS = (); }; };
-		91B9D0811BB1C419001D9789 /* yelp-logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07D1BB1C419001D9789 /* yelp-logo-large.png */; settings = {ASSET_TAGS = (); }; };
-		91B9D0821BB1C419001D9789 /* yelp-logo-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07E1BB1C419001D9789 /* yelp-logo-large@2x.png */; settings = {ASSET_TAGS = (); }; };
+		91B9D05E1BB10EA2001D9789 /* CustomHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9D05D1BB10EA2001D9789 /* CustomHeaderCellTableViewCell.swift */; };
+		91B9D0611BB11887001D9789 /* yelp-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D05F1BB11887001D9789 /* yelp-logo.png */; };
+		91B9D0621BB11887001D9789 /* yelp-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0601BB11887001D9789 /* yelp-logo@2x.png */; };
+		91B9D0691BB13DC2001D9789 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0651BB13DC2001D9789 /* selected.png */; };
+		91B9D06A1BB13DC2001D9789 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0661BB13DC2001D9789 /* selected@2x.png */; };
+		91B9D06B1BB13DC2001D9789 /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0671BB13DC2001D9789 /* unselected.png */; };
+		91B9D06C1BB13DC2001D9789 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0681BB13DC2001D9789 /* unselected@2x.png */; };
+		91B9D0721BB142A3001D9789 /* CustomFooterCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B9D0711BB142A3001D9789 /* CustomFooterCellTableViewCell.swift */; };
+		91B9D0751BB1569E001D9789 /* pickle-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0731BB1569E001D9789 /* pickle-button.png */; };
+		91B9D0761BB1569E001D9789 /* pickle-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0741BB1569E001D9789 /* pickle-button@2x.png */; };
+		91B9D0791BB1602F001D9789 /* pickle-all-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0771BB1602F001D9789 /* pickle-all-button.png */; };
+		91B9D07A1BB1602F001D9789 /* pickle-all-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D0781BB1602F001D9789 /* pickle-all-button@2x.png */; };
+		91B9D07F1BB1C419001D9789 /* result-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07B1BB1C419001D9789 /* result-background.jpg */; };
+		91B9D0801BB1C419001D9789 /* result-background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07C1BB1C419001D9789 /* result-background@2x.jpg */; };
+		91B9D0811BB1C419001D9789 /* yelp-logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07D1BB1C419001D9789 /* yelp-logo-large.png */; };
+		91B9D0821BB1C419001D9789 /* yelp-logo-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91B9D07E1BB1C419001D9789 /* yelp-logo-large@2x.png */; };
 		91BA8B441AA93126007664D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA8B431AA93126007664D3 /* AppDelegate.swift */; };
 		91BA8B461AA93126007664D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA8B451AA93126007664D3 /* ViewController.swift */; };
 		91BA8B491AA93126007664D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91BA8B471AA93126007664D3 /* Main.storyboard */; };
 		91BA8B4B1AA93126007664D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91BA8B4A1AA93126007664D3 /* Images.xcassets */; };
 		91BA8B4E1AA93126007664D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA8B4C1AA93126007664D3 /* LaunchScreen.xib */; };
 		91BA8B5A1AA93126007664D3 /* pickleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA8B591AA93126007664D3 /* pickleTests.swift */; };
-		91EFF4601BB0DFAF005D6D8E /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EFF45F1BB0DFAF005D6D8E /* back-arrow@2x.png */; settings = {ASSET_TAGS = (); }; };
-		91EFF4621BB0E23E005D6D8E /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EFF4611BB0E23E005D6D8E /* back-arrow.png */; settings = {ASSET_TAGS = (); }; };
+		91EFF4601BB0DFAF005D6D8E /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EFF45F1BB0DFAF005D6D8E /* back-arrow@2x.png */; };
+		91EFF4621BB0E23E005D6D8E /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EFF4611BB0E23E005D6D8E /* back-arrow.png */; };
 		91FFCF591AA9509900F793BE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FFCF581AA9509900F793BE /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		912BEFC31BA9EC09006A4674 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
 		912BEFCB1BA9EDE7006A4674 /* onyx-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onyx-logo.png"; sourceTree = "<group>"; };
 		912BEFCD1BAA2347006A4674 /* menu-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "menu-background.jpg"; sourceTree = "<group>"; };
+		9144738C1CFA3ABF00CD4482 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		9144738D1CFA3ABF00CD4482 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		91597E371BAB860B00C257CC /* current-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "current-location.png"; sourceTree = "<group>"; };
 		91597E391BABC24F00C257CC /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		918033E01BB0B998002C09B5 /* dark-menu-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark-menu-background.jpg"; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 			files = (
 				91B7220E1AEEF90E00399308 /* MapKit.framework in Frameworks */,
 				91B7220C1AEEF90600399308 /* CoreLocation.framework in Frameworks */,
+				9144738F1CFA3ABF00CD4482 /* Crashlytics.framework in Frameworks */,
+				9144738E1CFA3ABF00CD4482 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +187,8 @@
 				91BA8B401AA93126007664D3 /* pickle */,
 				91BA8B561AA93126007664D3 /* pickleTests */,
 				91BA8B3F1AA93126007664D3 /* Products */,
+				9144738C1CFA3ABF00CD4482 /* Fabric.framework */,
+				9144738D1CFA3ABF00CD4482 /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,6 +257,7 @@
 				91BA8B3A1AA93126007664D3 /* Sources */,
 				91BA8B3B1AA93126007664D3 /* Frameworks */,
 				91BA8B3C1AA93126007664D3 /* Resources */,
+				9144738B1CFA3A9500CD4482 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -367,6 +376,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9144738B1CFA3A9500CD4482 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 7509782b54a478dc5386374e81ef3a17127e3572 eac39bd4f2d78ba0943c5f982462fa56e4f17b409a11ec7e1b572435977641be";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		91BA8B3A1AA93126007664D3 /* Sources */ = {
@@ -506,6 +531,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = pickle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.onyx.$(PRODUCT_NAME:rfc1034identifier)";
@@ -520,6 +549,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = pickle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.onyx.$(PRODUCT_NAME:rfc1034identifier)";
@@ -532,10 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -552,10 +582,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = pickleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.onyx.$(PRODUCT_NAME:rfc1034identifier)";

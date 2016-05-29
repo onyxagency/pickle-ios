@@ -29,7 +29,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
   
   func updateTime() {
     
-    count--
+    count -= 1
     
     if count <= 0 {
       
@@ -85,7 +85,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     getDirections.layer.borderColor = UIColor.whiteColor().CGColor
     
-    placeImage.layer.cornerRadius = placeImage.frame.width
+    placeImage.layer.cornerRadius = placeImage.frame.width / 2
     placeImage.clipsToBounds = true
     
     var resultPlaces = places
@@ -119,35 +119,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
       downloadImage(placeRatingURL, image: ratingImage)
     }
     
-    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ResultViewController.updateTime), userInfo: nil, repeats: true)
     
     yelpUrl.setTitle(resultPlace["mobileUrl"], forState: .Normal)
     
     lat = resultPlace["latitude"]!
     lng = resultPlace["longitude"]!
-    
-    // get distance between users location and destination
-    
-//    if locationUser.count > 0 {
-//      
-//      let userLocation:CLLocation = CLLocation(latitude: locationUser["latitude"]!, longitude: locationUser["longitude"]!)
-//      
-//      let destLatitude:Double = NSString(string: resultPlace["latitude"]!).doubleValue
-//      let destLat:CLLocationDegrees = destLatitude
-//      let destLongitude:Double = NSString(string: resultPlace["longitude"]!).doubleValue
-//      let destLong:CLLocationDegrees = destLongitude
-//      
-//      let destLocation:CLLocation = CLLocation(latitude: destLat, longitude: destLong)
-//      
-//      let distance:CLLocationDistance = userLocation.distanceFromLocation(destLocation)
-//      
-//      let df = MKDistanceFormatter()
-//      
-//      df.unitStyle = .Abbreviated
-//      
-//      distanceLabel.text = df.stringFromDistance(distance)
-//      
-//    }
     
   }
   

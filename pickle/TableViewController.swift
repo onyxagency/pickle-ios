@@ -132,12 +132,12 @@ class TableViewController: UITableViewController {
     if places[indexPath.row]["selected"] == "true" {
       
       places[indexPath.row]["selected"] = "false"
-      placeCount--
+      placeCount -= 1
       
     } else {
     
       places[indexPath.row]["selected"] = "true"
-      placeCount++
+      placeCount += 1
       
     }
     
@@ -146,13 +146,13 @@ class TableViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    if cell.respondsToSelector("setSeparatorInset:") {
+    if cell.respondsToSelector(Selector("setSeparatorInset:")) {
       cell.separatorInset = UIEdgeInsetsZero
     }
-    if cell.respondsToSelector("setLayoutMargins:") {
+    if cell.respondsToSelector(Selector("setLayoutMargins:")) {
       cell.layoutMargins = UIEdgeInsetsZero
     }
-    if cell.respondsToSelector("setPreservesSuperviewLayoutMargins:") {
+    if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")) {
       cell.preservesSuperviewLayoutMargins = false
     }
   }
