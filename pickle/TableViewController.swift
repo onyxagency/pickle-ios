@@ -19,7 +19,7 @@ class TableViewController: UITableViewController {
     
     navigationItem.title = ""
     
-    performSegueWithIdentifier("showResult", sender: nil)
+    performSegueWithIdentifier("resultLoading", sender: nil)
 
   }
   

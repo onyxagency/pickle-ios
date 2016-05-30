@@ -22,6 +22,7 @@
 		9144738F1CFA3ABF00CD4482 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9144738D1CFA3ABF00CD4482 /* Crashlytics.framework */; };
 		91597E381BAB860B00C257CC /* current-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 91597E371BAB860B00C257CC /* current-location.png */; };
 		91597E3A1BABC24F00C257CC /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91597E391BABC24F00C257CC /* arrow.png */; };
+		916101AF1CFBAFEC009D5A45 /* ResultLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916101AE1CFBAFEC009D5A45 /* ResultLoadingViewController.swift */; };
 		918033E11BB0B998002C09B5 /* dark-menu-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 918033E01BB0B998002C09B5 /* dark-menu-background.jpg */; };
 		919BE6B91AE8467700C92D80 /* vwTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 919BE6B81AE8467700C92D80 /* vwTblCell.xib */; };
 		919BE6BB1AE846E000C92D80 /* TblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919BE6BA1AE846E000C92D80 /* TblCell.swift */; };
@@ -82,6 +83,7 @@
 		9144738D1CFA3ABF00CD4482 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		91597E371BAB860B00C257CC /* current-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "current-location.png"; sourceTree = "<group>"; };
 		91597E391BABC24F00C257CC /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		916101AE1CFBAFEC009D5A45 /* ResultLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultLoadingViewController.swift; sourceTree = "<group>"; };
 		918033E01BB0B998002C09B5 /* dark-menu-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark-menu-background.jpg"; sourceTree = "<group>"; };
 		919BE6B81AE8467700C92D80 /* vwTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwTblCell.xib; sourceTree = "<group>"; };
 		919BE6BA1AE846E000C92D80 /* TblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TblCell.swift; sourceTree = "<group>"; };
@@ -208,14 +210,15 @@
 				91BA8B451AA93126007664D3 /* ViewController.swift */,
 				919BE6B81AE8467700C92D80 /* vwTblCell.xib */,
 				919BE6BA1AE846E000C92D80 /* TblCell.swift */,
+				912BEFB91BA9DF0C006A4674 /* LaunchViewController.swift */,
 				91BA8B471AA93126007664D3 /* Main.storyboard */,
 				91B9D05D1BB10EA2001D9789 /* CustomHeaderCellTableViewCell.swift */,
 				91B9D0711BB142A3001D9789 /* CustomFooterCellTableViewCell.swift */,
+				916101AE1CFBAFEC009D5A45 /* ResultLoadingViewController.swift */,
 				919BE6BC1AE9ADD700C92D80 /* ResultViewController.swift */,
 				91FFCF581AA9509900F793BE /* TableViewController.swift */,
 				91BA8B4A1AA93126007664D3 /* Images.xcassets */,
 				91BA8B4C1AA93126007664D3 /* LaunchScreen.xib */,
-				912BEFB91BA9DF0C006A4674 /* LaunchViewController.swift */,
 				91BA8B411AA93126007664D3 /* Supporting Files */,
 				912BEFBC1BA9EB67006A4674 /* Resources */,
 			);
@@ -406,6 +409,7 @@
 				91FFCF591AA9509900F793BE /* TableViewController.swift in Sources */,
 				919BE6BB1AE846E000C92D80 /* TblCell.swift in Sources */,
 				91BA8B441AA93126007664D3 /* AppDelegate.swift in Sources */,
+				916101AF1CFBAFEC009D5A45 /* ResultLoadingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

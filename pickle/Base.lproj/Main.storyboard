@@ -590,12 +590,33 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="WcE-5A-MYP" kind="show" identifier="showResult" id="lIH-e8-lVM"/>
+                        <segue destination="x7T-Tm-tQe" kind="show" identifier="resultLoading" id="7AT-vp-Hrl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhB-iq-T3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1827" y="381"/>
+        </scene>
+        <!--Result Loading View Controller-->
+        <scene sceneID="yz2-S2-4po">
+            <objects>
+                <viewController id="x7T-Tm-tQe" customClass="ResultLoadingViewController" customModule="pickle" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6GI-R8-ify"/>
+                        <viewControllerLayoutGuide type="bottom" id="ERa-l7-BqR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LUJ-ha-RPl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.40392156862745099" green="0.80392156862745101" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="WcE-5A-MYP" kind="show" identifier="showResult" id="Wd6-PZ-r0C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pPx-bE-bZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2520" y="381"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="1Ne-Tt-3WS">
@@ -611,6 +632,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result-background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4us-94-ogc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.40392156862745099" green="0.80392156862745101" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8u-Rc-FTx">
                                 <rect key="frame" x="150" y="244" width="300" height="39"/>
@@ -885,7 +907,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckG-TQ-BEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1138" y="1077"/>
+            <point key="canvasLocation" x="2520" y="1105"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ssb-BW-jCG">
@@ -916,6 +938,6 @@
         <image name="yelp-logo.png" width="32" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WUj-q8-ZX2"/>
+        <segue reference="jdT-ZN-baJ"/>
     </inferredMetricsTieBreakers>
 </document>
