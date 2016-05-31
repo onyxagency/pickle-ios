@@ -275,7 +275,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                 
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
-                self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
+                self.displayAlert("Oops!", error: "We couldn't connect to the server, please try again later.")
                 
               }
               
@@ -285,7 +285,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             
             dispatch_async(dispatch_get_main_queue()) {
               
-              self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
+              self.displayAlert("Oops!", error: "We couldn't connect to the server, please try again later.")
               
             }
             
