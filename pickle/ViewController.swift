@@ -275,7 +275,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                 
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
-                self.displayAlert("Oops!", error: "We couldn't connect to the server, please try again later.")
+                self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
                 
               }
               
