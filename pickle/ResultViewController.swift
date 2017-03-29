@@ -24,7 +24,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
   var lat:NSString = ""
   var lng:NSString = ""
   
-  var timer = NSTimer()
+  var timer = Timer()
   var count = 300
   
   func updateTime() {
@@ -45,7 +45,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
   }
   
-  func timeString(time:Int) -> String {
+  func timeString(_ time:Int) -> String {
     
     let minutes = Int(time) / 60
     let seconds = Int(time) % 60
@@ -53,13 +53,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
   }
   
-  @IBAction func goToYelp(sender: AnyObject) {
-    let targetURL = NSURL(string: yelpUrl.currentTitle!)
-    let application = UIApplication.sharedApplication()
+  @IBAction func goToYelp(_ sender: AnyObject) {
+    let targetURL = URL(string: yelpUrl.currentTitle!)
+    let application = UIApplication.shared
     application.openURL(targetURL!)
   }
   
-  @IBAction func getDirections(sender: AnyObject) {
+  @IBAction func getDirections(_ sender: AnyObject) {
     
     let latitude:CLLocationDegrees = lat.doubleValue
     let longitude:CLLocationDegrees = lng.doubleValue
@@ -68,13 +68,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
     let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
     let options = [
-      MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-      MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+      MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+      MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
     ]
     let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
     let mapItem = MKMapItem(placemark: placemark)
     mapItem.name = placeName.text!
-    mapItem.openInMapsWithLaunchOptions(options)
+    mapItem.openInMaps(launchOptions: options)
     
   }
   
@@ -83,7 +83,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
 
     self.title = "Your Pickle"
     
-    getDirections.layer.borderColor = UIColor.whiteColor().CGColor
+    getDirections.layer.borderColor = UIColor.white.cgColor
     
     placeImage.layer.cornerRadius = placeImage.frame.width / 2
     placeImage.clipsToBounds = true
@@ -92,11 +92,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     if placeCount > 0 {
       
-      for index in (resultPlaces.count - 1).stride(through: 0, by: -1) {
+      for index in stride(from: (resultPlaces.count - 1), through: 0, by: -1) {
         
         if resultPlaces[index]["selected"]! == "false" {
           
-          resultPlaces.removeAtIndex(index)
+          resultPlaces.remove(at: index)
           
         }
         
@@ -108,23 +108,23 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     let resultPlace = resultPlaces[randomIndex]
     
-    if let placeImageURL = NSURL(string: resultPlace["imageUrl"]!) {
+    if let placeImageURL = URL(string: resultPlace["imageUrl"]!) {
       downloadImage(placeImageURL, image: placeImage)
     }
       
     placeName.text = resultPlace["name"]
     placeCategories.text = resultPlace["category"]
     
-    if let placeRatingURL = NSURL(string: resultPlace["rating"]!) {
+    if let placeRatingURL = URL(string: resultPlace["rating"]!) {
       downloadImage(placeRatingURL, image: ratingImage)
     }
     
-    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ResultViewController.updateTime), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ResultViewController.updateTime), userInfo: nil, repeats: true)
     
-    yelpUrl.setTitle(resultPlace["mobileUrl"], forState: .Normal)
+    yelpUrl.setTitle(resultPlace["mobileUrl"], for: UIControlState())
     
-    lat = resultPlace["latitude"]!
-    lng = resultPlace["longitude"]!
+    lat = resultPlace["latitude"]! as NSString
+    lng = resultPlace["longitude"]! as NSString
     
   }
   

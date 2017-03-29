@@ -15,11 +15,11 @@ class TableViewController: UITableViewController {
   //@IBOutlet var pickleButton: UIBarButtonItem!
   //@IBOutlet var pickleButton: UIButton!
   
-  @IBAction func pickleAll(sender: AnyObject) {
+  @IBAction func pickleAll(_ sender: AnyObject) {
     
     navigationItem.title = ""
     
-    performSegueWithIdentifier("showResult", sender: nil)
+    performSegue(withIdentifier: "showResult", sender: nil)
 
   }
   
@@ -28,9 +28,9 @@ class TableViewController: UITableViewController {
     
     //register custom cell
     let nib = UINib(nibName: "vwTblCell", bundle: nil)
-    tableView.registerNib(nib, forCellReuseIdentifier: "cell")
+    tableView.register(nib, forCellReuseIdentifier: "cell")
     
-    self.navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+    self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
     self.navigationController?.navigationBar.barTintColor = colorWithHexString("6FD16B")
     
     let navBarFont:AnyObject = UIFont(name: "CircularStd-Book", size: 16)!
@@ -38,7 +38,7 @@ class TableViewController: UITableViewController {
     
     self.tableView.separatorColor = colorWithHexString("D8D8D8")
 
-    self.tableView.tableFooterView = UIView(frame: CGRectZero)
+    self.tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,28 +52,28 @@ class TableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
   }
 
-  override func numberOfSectionsInTableView(tableView: (UITableView!)) -> Int {
+  override func numberOfSections(in tableView: (UITableView!)) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
       return 1
   }
 
-  override func tableView(tableView: (UITableView!), numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: (UITableView!), numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
       return places.count
   }
 
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell:TblCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! TblCell
+    let cell:TblCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TblCell
     
     self.configureCell(cell, atIndexPath: indexPath)
     
     return cell
   }
 
-  func configureCell(cell: TblCell, atIndexPath indexPath: NSIndexPath) {
+  func configureCell(_ cell: TblCell, atIndexPath indexPath: IndexPath) {
     
     cell.placeName.text = places[indexPath.row]["name"]
     
@@ -81,29 +81,29 @@ class TableViewController: UITableViewController {
     
     cell.placeAddress.text = places[indexPath.row]["address"]
     
-    if let ratingURL = NSURL(string: places[indexPath.row]["rating"]!) {
+    if let ratingURL = URL(string: places[indexPath.row]["rating"]!) {
       downloadImage(ratingURL, image: cell.placeRating)
     }
     
-    if let imageURL = NSURL(string: places[indexPath.row]["imageUrl"]!) {
+    if let imageURL = URL(string: places[indexPath.row]["imageUrl"]!) {
       downloadImage(imageURL, image: cell.placeImage)
     }
     
     if (places[indexPath.row]["selected"] == "true") {
       
       cell.backgroundColor = colorWithHexString("EBFFEA")
-      UIView.transitionWithView(cell.placeSelectedImage,
+      UIView.transition(with: cell.placeSelectedImage,
         duration: 0.2,
-        options: .TransitionCrossDissolve,
+        options: .transitionCrossDissolve,
         animations: { cell.placeSelectedImage.image = UIImage(named: "selected.png") },
         completion: nil)
       
     } else {
       
-      cell.backgroundColor = UIColor.whiteColor()
-      UIView.transitionWithView(cell.placeSelectedImage,
+      cell.backgroundColor = UIColor.white
+      UIView.transition(with: cell.placeSelectedImage,
         duration: 0.2,
-        options: .TransitionCrossDissolve,
+        options: .transitionCrossDissolve,
         animations: { cell.placeSelectedImage.image = UIImage(named: "unselected.png") },
         completion: nil)
       
@@ -111,23 +111,23 @@ class TableViewController: UITableViewController {
     
   }
   
-  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! CustomHeaderCellTableViewCell
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") as! CustomHeaderCellTableViewCell
     headerCell.backgroundColor = colorWithHexString("F6F6F6")
     return headerCell
   }
   
-  override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    let footerCell = tableView.dequeueReusableCellWithIdentifier("FooterCell") as! CustomFooterCellTableViewCell
-    footerCell.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0)
+  override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    let footerCell = tableView.dequeueReusableCell(withIdentifier: "FooterCell") as! CustomFooterCellTableViewCell
+    footerCell.backgroundColor = UIColor.clear.withAlphaComponent(0)
     if placeCount > 0 {
-      footerCell.pickleButton.setTitle("\(placeCount)", forState: .Normal)
-      footerCell.pickleButton.setBackgroundImage(UIImage(named: "pickle-button.png"), forState: .Normal)
+      footerCell.pickleButton.setTitle("\(placeCount)", for: UIControlState())
+      footerCell.pickleButton.setBackgroundImage(UIImage(named: "pickle-button.png"), for: UIControlState())
     }
     return footerCell
   }
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     if places[indexPath.row]["selected"] == "true" {
       
@@ -145,41 +145,41 @@ class TableViewController: UITableViewController {
     
   }
   
-  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    if cell.respondsToSelector(Selector("setSeparatorInset:")) {
-      cell.separatorInset = UIEdgeInsetsZero
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+      cell.separatorInset = UIEdgeInsets.zero
     }
-    if cell.respondsToSelector(Selector("setLayoutMargins:")) {
-      cell.layoutMargins = UIEdgeInsetsZero
+    if cell.responds(to: #selector(setter: UIView.layoutMargins)) {
+      cell.layoutMargins = UIEdgeInsets.zero
     }
-    if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")) {
+    if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
       cell.preservesSuperviewLayoutMargins = false
     }
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     
     self.navigationItem.title = "Places in \(friendlyLocation)"
-    self.navigationController?.navigationBarHidden = false
+    self.navigationController?.isNavigationBarHidden = false
     placeCount = 0
 
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     
-    self.navigationController?.navigationBarHidden = true
+    self.navigationController?.isNavigationBarHidden = true
     
   }
   
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 93
   }
   
-  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 25
   }
   
-  override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return 72
   }
 

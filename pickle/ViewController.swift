@@ -8,6 +8,30 @@
 
 import UIKit
 import CoreLocation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 var places = [Dictionary<String, String>()]
 var locationUser = [String:CLLocationDegrees]()
@@ -19,38 +43,38 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
   
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
   
-  func displayAlert(title:String, error:String) {
+  func displayAlert(_ title:String, error:String) {
     
-    let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
+    let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
       
-      self.continueBtn.setTitle("Continue", forState: .Normal)
-      self.continueArrow.hidden = false
+      self.continueBtn.setTitle("Continue", for: UIControlState())
+      self.continueArrow.isHidden = false
       self.menuBar.backgroundColor = colorWithHexString("026F5A")
       
       let backgroundImage = UIImage(named: "menu-background.jpg")
-      UIView.transitionWithView(self.backgroundImage,
+      UIView.transition(with: self.backgroundImage,
         duration: 0.3,
-        options: .TransitionCrossDissolve,
+        options: .transitionCrossDissolve,
         animations: { self.backgroundImage.image = backgroundImage },
         completion: nil)
       
-      self.line.hidden = false
-      self.currentLocationImage.hidden = false
-      self.location.hidden = false
-      self.breakfast.hidden = false
-      self.lunch.hidden = false
-      self.dinner.hidden = false
+      self.line.isHidden = false
+      self.currentLocationImage.isHidden = false
+      self.location.isHidden = false
+      self.breakfast.isHidden = false
+      self.lunch.isHidden = false
+      self.dinner.isHidden = false
       
     }))
     
-    self.presentViewController(alert, animated: true, completion: nil)
+    self.present(alert, animated: true, completion: nil)
     
   }
   
   var currentLocation = CLLocation()
   
-  @IBAction func currentLocation(sender: AnyObject) {
+  @IBAction func currentLocation(_ sender: AnyObject) {
     
     manager = CLLocationManager()
     manager.delegate = self
@@ -71,7 +95,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
   @IBOutlet var line: UIView!
   @IBOutlet var currentLocationImage: UIImageView!
   
-  @IBAction func locationChanged(sender: AnyObject) {
+  @IBAction func locationChanged(_ sender: AnyObject) {
     setContinueBtn()
   }
   
@@ -80,12 +104,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
   func setContinueBtn() {
     if (mealType != "" && location.text?.characters.count >= 3) {
       self.continueBtn.alpha = 1
-      self.continueBtn.enabled = true
+      self.continueBtn.isEnabled = true
       self.continueArrow.alpha = 1
     }
   }
   
-  @IBAction func breakfast(sender: AnyObject) {
+  @IBAction func breakfast(_ sender: AnyObject) {
     self.breakfast.alpha = 1
     self.lunch.alpha = 0.5
     self.dinner.alpha = 0.5
@@ -93,7 +117,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     setContinueBtn()
   }
   
-  @IBAction func lunch(sender: AnyObject) {
+  @IBAction func lunch(_ sender: AnyObject) {
     self.breakfast.alpha = 0.5
     self.lunch.alpha = 1
     self.dinner.alpha = 0.5
@@ -101,7 +125,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     setContinueBtn()
   }
   
-  @IBAction func dinner(sender: AnyObject) {
+  @IBAction func dinner(_ sender: AnyObject) {
     self.breakfast.alpha = 0.5
     self.lunch.alpha = 0.5
     self.dinner.alpha = 1
@@ -111,7 +135,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
   
   var userLocation = ""
   
-  @IBAction func getFood(sender: AnyObject) {
+  @IBAction func getFood(_ sender: AnyObject) {
     
     var errorMessage = ""
     
@@ -132,47 +156,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
       
     } else {
       
-      continueBtn.setTitle("Loading...", forState: .Normal)
-      continueArrow.hidden = true
-      menuBar.backgroundColor = UIColor.clearColor().colorWithAlphaComponent(0)
+      continueBtn.setTitle("Loading...", for: UIControlState())
+      continueArrow.isHidden = true
+      menuBar.backgroundColor = UIColor.clear.withAlphaComponent(0)
       
       let darkBackgroundImage = UIImage(named: "dark-menu-background.jpg")
-      UIView.transitionWithView(self.backgroundImage,
+      UIView.transition(with: self.backgroundImage,
         duration: 0.3,
-        options: .TransitionCrossDissolve,
+        options: .transitionCrossDissolve,
         animations: { self.backgroundImage.image = darkBackgroundImage },
         completion: nil)
       
-      line.hidden = true
-      currentLocationImage.hidden = true
-      location.hidden = true
-      breakfast.hidden = true
-      lunch.hidden = true
-      dinner.hidden = true
+      line.isHidden = true
+      currentLocationImage.isHidden = true
+      location.isHidden = true
+      breakfast.isHidden = true
+      lunch.isHidden = true
+      dinner.isHidden = true
       
-      UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+      UIApplication.shared.beginIgnoringInteractionEvents()
     
-      let request = NSMutableURLRequest(URL: NSURL(string: "http://pickle.onyxla.co/search")!)
-      let session = NSURLSession.sharedSession()
+      var request = URLRequest(url:URL(string: "http://pickle.onyxla.co/search")!)
+      //var request = NSMutableURLRequest(url: URL(string: "http://pickle.onyxla.co/search")!)
+      let session = URLSession.shared
     
       let params = ["location":userLocation, "term":mealType] as Dictionary
     
-      request.HTTPMethod = "POST"
+      request.httpMethod = "POST"
       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       request.addValue("application/json", forHTTPHeaderField: "Accept")
       
       do {
-        request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: [])
+        request.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
       } catch {
         print(error)
-        request.HTTPBody = nil
+        request.httpBody = nil
       }
     
-      let task = session.dataTaskWithRequest(request) { data, response, error in
+      let task = session.dataTask(with: request, completionHandler: { data, response, error in
         
         guard data != nil else {
           print("no data found: \(error)")
-          dispatch_async(dispatch_get_main_queue()) {
+          DispatchQueue.main.async {
             
             self.displayAlert("Oops!", error: "We couldn't connect to the server")
             
@@ -182,9 +207,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
         
         do {
           
-          if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+          if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
             
-            if let businesses:NSArray = json["businesses"] as? NSArray {
+            if let businesses = json["businesses"] as? [[String:Any]]  {
             
               if businesses.count > 0 {
                 
@@ -251,17 +276,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
                   
                 }
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                   
-                  UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                  UIApplication.shared.endIgnoringInteractionEvents()
                   
-                  self.performSegueWithIdentifier("showPlaces", sender: nil)
+                  self.performSegue(withIdentifier: "showPlaces", sender: nil)
                   
                 }
                 
               } else {
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                   
                   self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
                   
@@ -271,9 +296,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
               
             } else {
               
-              dispatch_async(dispatch_get_main_queue()) {
+              DispatchQueue.main.async {
                 
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                UIApplication.shared.endIgnoringInteractionEvents()
                 
                 self.displayAlert("Oops!", error: "We couldn't find any results for your location, please try again.")
                 
@@ -283,7 +308,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
             
           } else {
             
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
               
               self.displayAlert("Oops!", error: "We couldn't connect to the server, please try again later.")
               
@@ -293,11 +318,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
           
         } catch let parseError {
           print(parseError)
-          let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+          let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
           print("Error could not parse JSON: '\(jsonStr)'")
         }
         
-      }
+      }) 
     
       task.resume()
       
@@ -305,9 +330,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
   }
   
-  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
-    if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways) {
+    if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
       
       if manager.location != nil {
         
@@ -325,7 +350,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
           
           if error != nil {
             
-            print(error)
+            print(error!)
             
           } else {
             
@@ -374,13 +399,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     
-    self.navigationController?.navigationBarHidden = true
-    places.removeAll(keepCapacity: true)
+    self.navigationController?.isNavigationBarHidden = true
+    places.removeAll(keepingCapacity: true)
     
-    self.continueBtn.setTitle("Continue", forState: .Normal)
-    self.continueArrow.hidden = false
+    self.continueBtn.setTitle("Continue", for: UIControlState())
+    self.continueArrow.isHidden = false
     
   }
   
@@ -389,10 +414,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     // Do any additional setup after loading the view, typically from a nib.
     
     if places.count == 1 {
-      places.removeAtIndex(0)
+      places.remove(at: 0)
     }
     
-    self.continueBtn.enabled = false
+    self.continueBtn.isEnabled = false
     
     self.location.delegate = self
     
@@ -403,7 +428,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDe
     // Dispose of any resources that can be recreated.
   }
   
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     self.view.endEditing(true)
     return false
   }
